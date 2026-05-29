@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion as m } from "framer-motion";
 import { Logo } from "@/components/layout/Logo";
@@ -12,17 +12,40 @@ import { cn } from "@/lib/cn";
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
+  const [openKey, setOpenKey] = useState<string | null>(null);
   const active = useUI((s) => s.activeSection);
   const scrollProgress = useUI((s) => s.scrollProgress);
   const setMobileOpen = useUI((s) => s.setMobileOpen);
   const { t } = useT();
+  const navRef = useRef<HTMLElement>(null);
 
+  // Solid bar on scroll
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Close flyouts on Escape + click outside
+  useEffect(() => {
+    if (!openKey) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpenKey(null);
+    const onPointerDown = (e: PointerEvent) => {
+      if (!navRef.current?.contains(e.target as Node)) setOpenKey(null);
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("pointerdown", onPointerDown);
+    };
+  }, [openKey]);
+
+  // Close when the active section changes — the user actually navigated.
+  useEffect(() => {
+    setOpenKey(null);
+  }, [active]);
 
   return (
     <>
@@ -37,13 +60,27 @@ export function Nav() {
         <div className="shell flex h-[74px] items-center justify-between gap-6">
           <Logo />
 
-          <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
+          <nav
+            ref={navRef}
+            className="hidden items-center gap-1 lg:flex"
+            aria-label="Primary"
+            onMouseLeave={() => setOpenKey(null)}
+          >
             {NAV.map((item) => {
               const isActive = item.href === `#${active}`;
+              const isOpen = openKey === item.key;
               return (
-                <div key={item.key} className="group relative">
+                <div
+                  key={item.key}
+                  className="relative"
+                  onMouseEnter={() => item.children && setOpenKey(item.key)}
+                >
                   <a
                     href={item.href}
+                    aria-haspopup={item.children ? "menu" : undefined}
+                    aria-expanded={item.children ? isOpen : undefined}
+                    onClick={() => setOpenKey(null)}
+                    onFocus={() => item.children && setOpenKey(item.key)}
                     className={cn(
                       "relative flex items-center gap-1.5 whitespace-nowrap px-2.5 py-2 font-mono text-[0.62rem] uppercase tracking-[0.14em] transition-colors",
                       isActive ? "text-current" : "ink-70 hover:text-current",
@@ -58,13 +95,22 @@ export function Nav() {
                     <span
                       className={cn(
                         "absolute inset-x-3 bottom-1 h-px origin-left bg-ochre transition-transform duration-500 ease-boutique",
-                        isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100",
+                        isActive ? "scale-x-100" : "scale-x-0",
                       )}
                     />
                   </a>
 
                   {item.children && (
-                    <div className="invisible absolute left-0 top-full w-60 translate-y-1 border border-line/15 bg-surface text-content opacity-0 shadow-xl transition-all duration-300 ease-boutique group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+                    <div
+                      role="menu"
+                      className={cn(
+                        "absolute left-0 top-full z-10 w-60 border border-line/15 bg-surface text-content shadow-xl",
+                        "transition-all duration-200 ease-out",
+                        isOpen
+                          ? "visible translate-y-0 opacity-100"
+                          : "pointer-events-none invisible translate-y-1 opacity-0",
+                      )}
+                    >
                       <span className="block border-b border-line/10 px-4 py-2 font-mono text-[0.6rem] uppercase tracking-label text-accent">
                         {t(item.key)}
                       </span>
@@ -72,6 +118,8 @@ export function Nav() {
                         <a
                           key={c.label}
                           href={c.href}
+                          role="menuitem"
+                          onClick={() => setOpenKey(null)}
                           className="block px-4 py-2.5 font-sans text-sm text-content/80 transition-colors hover:bg-surface-2 hover:text-content"
                         >
                           {c.label}
@@ -89,7 +137,6 @@ export function Nav() {
               to="/portal"
               className="hidden items-center gap-2 whitespace-nowrap border edge-mid px-3 py-1.5 font-mono text-[0.6rem] uppercase tracking-[0.16em] transition-colors hover:border-ochre hover:text-ochre md:inline-flex"
             >
-              <span className="h-1.5 w-1.5 bg-ochre" aria-hidden />
               {t("nav.portal")}
             </Link>
             <div className="hidden sm:block">
