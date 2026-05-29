@@ -10,9 +10,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@fontsource/eb-garamond": "^5.2.7",
     "@fontsource/ibm-plex-mono": "^5.1.0",
-    "@fontsource/ibm-plex-sans": "^5.2.8",
-    "@fontsource/newsreader": "^5.1.0",
+    "@fontsource/sora": "^5.2.8",
     "@fontsource/tiro-devanagari-hindi": "^5.1.0",
     "@types/d3-geo": "^3.1.0",
     "@types/topojson-client": "^3.1.5",
