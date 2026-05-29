@@ -1,4 +1,3 @@
-
 import { useRef } from "react";
 import { motion as m, useScroll, useTransform } from "framer-motion";
 import { Section } from "@/components/ui/Section";
@@ -24,47 +23,42 @@ export function Principal() {
     <Section id="principal" className="bg-bg">
       <div className="shell" ref={ref}>
         <div className="grid gap-14 md:grid-cols-12 md:gap-16">
-          {/* Portrait — designed circular monogram (real photo drops in here) */}
+          {/* Real principal portrait — from the school's own brand asset */}
           <Reveal className="md:col-span-5">
-            <div className="flex flex-col items-center">
-              <div className="relative aspect-square w-full max-w-sm">
-                <div className="absolute inset-0 rounded-full border border-line/20" />
-                <div className="absolute inset-[7%] rounded-full border border-gold/40" />
-                <div
-                  className="absolute inset-[12%] grid place-items-center rounded-full"
-                  style={{
-                    backgroundImage:
-                      "radial-gradient(120% 120% at 30% 25%, rgba(196,149,43,0.18), transparent 55%), linear-gradient(140deg, #0B1226, #1B2B5E)",
-                  }}
-                >
-                  <span className="font-display text-7xl font-light tracking-mega text-gold-light md:text-8xl">
-                    {principal.initials}
-                  </span>
-                  <span className="absolute bottom-[16%] font-mono text-[0.54rem] uppercase tracking-[0.28em] text-paper/45">
-                    Portrait · Coming Soon
-                  </span>
-                </div>
+            <figure className="relative">
+              <div className="relative aspect-square w-full max-w-sm overflow-hidden">
+                <img
+                  src="/img/principal.jpg"
+                  alt={pick(principal.name, locale)}
+                  width={300}
+                  height={300}
+                  className="h-full w-full object-cover"
+                />
+                {/* Forest L-shape mark — distinctive frame, not a generic border */}
+                <span aria-hidden className="pointer-events-none absolute -bottom-3 -left-3 h-16 w-px bg-forest-600" />
+                <span aria-hidden className="pointer-events-none absolute -bottom-3 left-[-12px] h-px w-16 bg-forest-600" />
+                <span aria-hidden className="pointer-events-none absolute -top-3 -right-3 h-16 w-px bg-ochre" />
+                <span aria-hidden className="pointer-events-none absolute -top-3 right-[-12px] h-px w-16 bg-ochre" />
               </div>
-              <div className="mt-7 text-center">
-                <p className="font-display text-2xl tracking-tight2">
+              <figcaption className="mt-6">
+                <p className="font-display text-2xl font-light tracking-tight2">
                   {pick(principal.name, locale)}
                 </p>
-                <p className="mt-1 font-mono text-[0.64rem] uppercase tracking-label text-accent">
+                <p className="mt-1 font-mono text-[0.62rem] uppercase tracking-label text-accent">
                   {pick(principal.role, locale)}
                 </p>
                 <p className="mt-4 font-mono text-[0.6rem] uppercase tracking-[0.18em] text-muted">
                   {t("principal.under")} {pick(principal.director, locale)},{" "}
                   {pick(principal.directorRole, locale)}
                 </p>
-              </div>
-            </div>
+              </figcaption>
+            </figure>
           </Reveal>
 
-          {/* Narrative */}
           <div className="relative md:col-span-7">
             <div className="absolute -left-6 top-2 hidden h-full w-px bg-line/15 md:block">
               <m.div
-                className="absolute left-0 top-0 w-px origin-top bg-gold"
+                className="absolute left-0 top-0 w-px origin-top bg-forest-600"
                 style={{ scaleY: lineScale, height: "100%" }}
               />
             </div>
@@ -93,7 +87,7 @@ export function Principal() {
                 <span className="font-display text-xl italic text-content">
                   {pick(principal.name, locale)}
                 </span>
-                <span className="h-px w-12 bg-gold" />
+                <span className="h-px w-12 bg-forest-600" />
               </div>
               <div className="mt-6">
                 <Button href="#footer" variant="outline">

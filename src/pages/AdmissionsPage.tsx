@@ -11,7 +11,7 @@ export function AdmissionsPage() {
     <>
       <Nav />
       <main>
-        <header className="bg-navy-900 px-6 pb-20 pt-40 text-paper">
+        <header className="bg-forest-900 px-6 pb-20 pt-40 text-paper">
           <div className="shell">
             <m.p
               initial={{ opacity: 0, y: 14 }}

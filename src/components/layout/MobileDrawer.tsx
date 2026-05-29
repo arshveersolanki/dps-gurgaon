@@ -28,21 +28,21 @@ export function MobileDrawer() {
     <AnimatePresence>
       {open && (
         <m.div
-          className="fixed inset-0 z-[90] flex flex-col bg-navy-900 text-paper lg:hidden"
+          className="fixed inset-0 z-[90] flex flex-col bg-forest-900 text-paper lg:hidden"
           initial={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
           animate={{ opacity: 1, clipPath: "inset(0 0 0% 0)" }}
           exit={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
           transition={{ duration: 0.5, ease: EASE_BOUTIQUE }}
         >
           <div className="flex h-[74px] items-center justify-between px-6">
-            <span className="font-mono text-[0.7rem] uppercase tracking-label text-gold-light">
+            <span className="font-mono text-[0.7rem] uppercase tracking-label text-ochre-light">
               {t("brand.line2")}
             </span>
             <button
               type="button"
               onClick={() => setOpen(false)}
               aria-label={t("nav.close")}
-              className="font-mono text-[0.72rem] uppercase tracking-label hover:text-gold"
+              className="font-mono text-[0.72rem] uppercase tracking-label hover:text-ochre"
             >
               {t("nav.close")} ✕
             </button>
@@ -59,9 +59,9 @@ export function MobileDrawer() {
                 <a
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="flex items-baseline gap-4 border-b border-paper/10 py-4 font-display text-3xl font-light tracking-tight2 transition-colors hover:text-gold"
+                  className="flex items-baseline gap-4 border-b border-paper/10 py-4 font-display text-3xl font-light tracking-tight2 transition-colors hover:text-ochre"
                 >
-                  <span className="font-mono text-[0.7rem] text-gold/70">0{i + 1}</span>
+                  <span className="font-mono text-[0.7rem] text-ochre/70">0{i + 1}</span>
                   {t(item.key)}
                 </a>
               </m.div>
@@ -72,9 +72,9 @@ export function MobileDrawer() {
             <Link
               to="/portal"
               onClick={() => setOpen(false)}
-              className="inline-flex items-center gap-2 border border-paper/30 px-5 py-3 font-mono text-[0.7rem] uppercase tracking-label hover:border-gold hover:text-gold"
+              className="inline-flex items-center gap-2 border border-paper/30 px-5 py-3 font-mono text-[0.7rem] uppercase tracking-label hover:border-ochre hover:text-ochre"
             >
-              <span className="h-1.5 w-1.5 bg-gold" aria-hidden />
+              <span className="h-1.5 w-1.5 bg-ochre" aria-hidden />
               {t("nav.portal")}
             </Link>
             <LangToggle />

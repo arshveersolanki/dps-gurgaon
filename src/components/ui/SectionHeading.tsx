@@ -35,7 +35,7 @@ export function SectionHeading({
       {eyebrow && (
         <m.p
           variants={fadeUp}
-          className={cn("eyebrow mb-5", tone === "invert" && "text-gold-light")}
+          className={cn("eyebrow mb-5", tone === "invert" && "text-ochre-light")}
         >
           {eyebrow}
         </m.p>

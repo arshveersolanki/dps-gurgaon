@@ -25,19 +25,19 @@ export function Labs() {
           {/* Featured — Atal Tinkering Lab */}
           {featured && (
             <Reveal className="lg:col-span-5">
-              <div className="relative flex h-full flex-col justify-between overflow-hidden border border-gold/40 bg-navy-900 p-8 text-paper">
+              <div className="relative flex h-full flex-col justify-between overflow-hidden border border-ochre/40 bg-forest-900 p-8 text-paper">
                 <div
                   className="pointer-events-none absolute inset-0"
                   style={{
                     backgroundImage:
-                      "radial-gradient(90% 90% at 80% 0%, rgba(196,149,43,0.16), transparent 55%)",
+                      "radial-gradient(90% 90% at 80% 0%, rgba(193,154,75,0.16), transparent 55%)",
                   }}
                 />
                 <div className="relative">
-                  <span className="inline-block bg-gold px-2.5 py-1 font-mono text-[0.58rem] uppercase tracking-label text-navy-900">
+                  <span className="inline-block bg-ochre px-2.5 py-1 font-mono text-[0.58rem] uppercase tracking-label text-forest-900">
                     {t("labs.featured")}
                   </span>
-                  <span className="mt-8 grid h-14 w-14 place-items-center border border-gold/40 text-gold-light">
+                  <span className="mt-8 grid h-14 w-14 place-items-center border border-ochre/40 text-ochre-light">
                     <Icon name={featured.icon} size={28} />
                   </span>
                   <h3 className="mt-6 font-display text-3xl font-light tracking-tight2">
@@ -49,7 +49,7 @@ export function Labs() {
                     </p>
                   )}
                 </div>
-                <p className="relative mt-8 font-mono text-[0.58rem] uppercase tracking-label text-gold-light/80">
+                <p className="relative mt-8 font-mono text-[0.58rem] uppercase tracking-label text-ochre-light/80">
                   Govt. of India · NITI Aayog Initiative
                 </p>
               </div>
@@ -70,7 +70,7 @@ export function Labs() {
                 variants={fadeUp}
                 className="group flex flex-col gap-3 bg-bg p-5 transition-colors hover:bg-surface-2"
               >
-                <span className="text-navy-400 transition-colors group-hover:text-gold">
+                <span className="text-forest-400 transition-colors group-hover:text-ochre">
                   <Icon name={lab.icon} size={26} />
                 </span>
                 <span className="font-display text-base leading-tight tracking-tight2">

@@ -41,7 +41,7 @@ export function CommunityOutreach() {
               variants={fadeUp}
               className="group flex flex-col bg-bg p-8 transition-colors hover:bg-surface-2"
             >
-              <span className="grid h-12 w-12 place-items-center border border-gold/40 text-gold">
+              <span className="grid h-12 w-12 place-items-center border border-ochre/40 text-ochre">
                 <Icon name={icons[o.id] ?? "sparkles"} size={24} />
               </span>
               <p className="mt-6 font-mono text-[0.6rem] uppercase tracking-label text-accent">

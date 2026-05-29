@@ -42,12 +42,12 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer id="footer" className="scroll-mt-24 border-t border-paper/10 bg-navy-900 text-paper">
+    <footer id="footer" className="scroll-mt-24 border-t border-paper/10 bg-forest-900 text-paper">
       <div className="shell grid gap-12 py-20 md:grid-cols-12 md:py-24">
         {/* Brand + contact */}
         <div className="md:col-span-4">
           <p className="font-display text-3xl font-light tracking-tight2">{t("brand.line1")}</p>
-          <p className="mt-2 font-mono text-[0.7rem] uppercase tracking-label text-gold-light">
+          <p className="mt-2 font-mono text-[0.7rem] uppercase tracking-label text-ochre-light">
             {t("brand.line2")}
           </p>
           <p className="mt-7 max-w-xs font-display text-2xl italic leading-snug text-paper/85">
@@ -56,12 +56,12 @@ export function Footer() {
           <div className="mt-7 space-y-2 font-sans text-sm text-paper/65">
             <p>{contact.address}</p>
             <p>
-              <a href={contact.phoneHref} className="hover:text-gold">
+              <a href={contact.phoneHref} className="hover:text-ochre">
                 {contact.phone}
               </a>
             </p>
             <p>
-              <a href={`mailto:${contact.email}`} className="hover:text-gold">
+              <a href={`mailto:${contact.email}`} className="hover:text-ochre">
                 {contact.email}
               </a>
             </p>
@@ -77,7 +77,7 @@ export function Footer() {
           <ul className="space-y-3">
             {NAV.map((item) => (
               <li key={item.key}>
-                <a href={item.href} className="font-sans text-sm text-paper/65 transition-colors hover:text-gold">
+                <a href={item.href} className="font-sans text-sm text-paper/65 transition-colors hover:text-ochre">
                   {t(item.key)}
                 </a>
               </li>
@@ -90,17 +90,17 @@ export function Footer() {
           <h3 className="eyebrow mb-6">{t("nav.admissions")}</h3>
           <ul className="space-y-3 font-sans text-sm text-paper/65">
             <li>
-              <Link to="/admissions" className="transition-colors hover:text-gold">
+              <Link to="/admissions" className="transition-colors hover:text-ochre">
                 Process
               </Link>
             </li>
             <li>
-              <a href="#admissions" className="transition-colors hover:text-gold">
+              <a href="#admissions" className="transition-colors hover:text-ochre">
                 Fee Structure
               </a>
             </li>
             <li>
-              <a href="#admissions" className="transition-colors hover:text-gold">
+              <a href="#admissions" className="transition-colors hover:text-ochre">
                 Entry Points
               </a>
             </li>
@@ -109,7 +109,7 @@ export function Footer() {
                 href={contact.campusCare}
                 target="_blank"
                 rel="noreferrer"
-                className="transition-colors hover:text-gold"
+                className="transition-colors hover:text-ochre"
               >
                 {t("footer.campuscare")}
               </a>
@@ -128,7 +128,7 @@ export function Footer() {
                 aria-label={s.label}
                 target="_blank"
                 rel="noreferrer"
-                className="grid h-10 w-10 place-items-center border border-paper/20 text-paper/70 transition-colors hover:border-gold hover:text-gold"
+                className="grid h-10 w-10 place-items-center border border-paper/20 text-paper/70 transition-colors hover:border-ochre hover:text-ochre"
               >
                 <SocialIcon id={s.id} />
               </a>
@@ -136,9 +136,9 @@ export function Footer() {
           </div>
           <Link
             to="/portal"
-            className="mt-7 inline-flex items-center gap-2 border border-gold/50 px-5 py-3 font-mono text-[0.68rem] uppercase tracking-label text-gold transition-colors hover:bg-gold hover:text-navy-900"
+            className="mt-7 inline-flex items-center gap-2 border border-ochre/50 px-5 py-3 font-mono text-[0.68rem] uppercase tracking-label text-ochre transition-colors hover:bg-ochre hover:text-forest-900"
           >
-            <span className="h-1.5 w-1.5 bg-gold" aria-hidden />
+            <span className="h-1.5 w-1.5 bg-ochre" aria-hidden />
             {t("nav.portal")}
           </Link>
         </div>
@@ -147,7 +147,7 @@ export function Footer() {
       <div className="border-t border-paper/10">
         <div className="shell flex flex-col items-start justify-between gap-3 py-6 font-mono text-[0.64rem] uppercase tracking-[0.14em] text-paper/45 md:flex-row md:items-center">
           <span>© {year} Delhi Public School, Gurgaon. {t("footer.rights")}</span>
-          <span className="text-gold-light/70">{t("footer.designed")}</span>
+          <span className="text-ochre-light/70">{t("footer.designed")}</span>
           <span>Silver Jubilee · 2026–27</span>
         </div>
       </div>

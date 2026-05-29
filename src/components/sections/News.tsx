@@ -45,17 +45,17 @@ export function News() {
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="absolute inset-0 transition-transform duration-700 ease-boutique group-hover:scale-[1.03]"
                 />
-                <span className="absolute left-4 top-4 bg-navy-600 px-3 py-1.5 font-mono text-[0.62rem] uppercase tracking-label text-paper">
+                <span className="absolute left-4 top-4 bg-forest-600 px-3 py-1.5 font-mono text-[0.62rem] uppercase tracking-label text-paper">
                   {pick(featured.category, locale)}
                 </span>
               </div>
               <p className="mt-5 font-mono text-[0.66rem] uppercase tracking-label text-muted">
                 {fmt(featured.date)}
               </p>
-              <h3 className="mt-3 max-w-xl font-display text-3xl font-light leading-[1.1] tracking-tight2 transition-colors group-hover:text-navy-500">
+              <h3 className="mt-3 max-w-xl font-display text-3xl font-light leading-[1.1] tracking-tight2 transition-colors group-hover:text-forest-500">
                 {pick(featured.title, locale)}
               </h3>
-              <span className="mt-4 inline-flex items-center gap-2 font-mono text-[0.68rem] uppercase tracking-label text-content/70 transition-colors group-hover:text-navy-500">
+              <span className="mt-4 inline-flex items-center gap-2 font-mono text-[0.68rem] uppercase tracking-label text-content/70 transition-colors group-hover:text-forest-500">
                 {t("news.readMore")}
                 <span className="transition-transform duration-500 ease-boutique group-hover:translate-x-1">→</span>
               </span>
@@ -85,7 +85,7 @@ export function News() {
                       <span className="h-px w-4 bg-line/30" />
                       {fmt(item.date)}
                     </p>
-                    <h3 className="mt-2 font-display text-xl font-light leading-snug tracking-tight2 transition-colors group-hover:text-navy-500">
+                    <h3 className="mt-2 font-display text-xl font-light leading-snug tracking-tight2 transition-colors group-hover:text-forest-500">
                       {pick(item.title, locale)}
                     </h3>
                   </div>

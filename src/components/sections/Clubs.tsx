@@ -20,7 +20,7 @@ export function Clubs() {
   };
 
   return (
-    <Section id="clubs" className="overflow-hidden bg-navy-900 text-paper">
+    <Section id="clubs" className="overflow-hidden bg-forest-900 text-paper">
       <div className="shell flex flex-wrap items-end justify-between gap-6">
         <SectionHeading eyebrow={t("clubs.eyebrow")} title={t("clubs.title")} tone="invert" />
         <div className="flex items-center gap-3">
@@ -32,7 +32,7 @@ export function Clubs() {
               type="button"
               onClick={() => nudge(-1)}
               aria-label="Previous"
-              className="grid h-11 w-11 place-items-center border border-paper/20 text-xl transition-colors hover:border-gold hover:text-gold"
+              className="grid h-11 w-11 place-items-center border border-paper/20 text-xl transition-colors hover:border-ochre hover:text-ochre"
             >
               ‹
             </button>
@@ -40,7 +40,7 @@ export function Clubs() {
               type="button"
               onClick={() => nudge(1)}
               aria-label="Next"
-              className="grid h-11 w-11 place-items-center border border-l-0 border-paper/20 text-xl transition-colors hover:border-gold hover:text-gold"
+              className="grid h-11 w-11 place-items-center border border-l-0 border-paper/20 text-xl transition-colors hover:border-ochre hover:text-ochre"
             >
               ›
             </button>
@@ -55,10 +55,10 @@ export function Clubs() {
         {clubs.map((club) => (
           <article
             key={club.id}
-            className="group flex w-[72vw] shrink-0 snap-start flex-col justify-between border border-paper/12 bg-navy-800/60 p-6 transition-colors hover:border-gold/50 sm:w-[44vw] md:w-[30vw] lg:w-[19vw]"
+            className="group flex w-[72vw] shrink-0 snap-start flex-col justify-between border border-paper/12 bg-forest-800/60 p-6 transition-colors hover:border-ochre/50 sm:w-[44vw] md:w-[30vw] lg:w-[19vw]"
           >
             <div>
-              <span className="grid h-12 w-12 place-items-center border border-paper/15 text-gold-light transition-colors group-hover:border-gold">
+              <span className="grid h-12 w-12 place-items-center border border-paper/15 text-ochre-light transition-colors group-hover:border-ochre">
                 <Icon name={club.icon} size={24} />
               </span>
               <h3 className="mt-6 font-display text-2xl font-light leading-tight tracking-tight2">

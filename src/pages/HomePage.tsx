@@ -1,7 +1,7 @@
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
-import { SilverJubilee } from "@/components/sections/SilverJubilee";
+import { NewsTicker } from "@/components/sections/NewsTicker";
 import { Numbers } from "@/components/sections/Numbers";
 import { Principal } from "@/components/sections/Principal";
 import { Academics } from "@/components/sections/Academics";
@@ -20,7 +20,7 @@ export function HomePage() {
       <Nav />
       <main>
         <Hero />
-        <SilverJubilee />
+        <NewsTicker />
         <Numbers />
         <Principal />
         <Academics />

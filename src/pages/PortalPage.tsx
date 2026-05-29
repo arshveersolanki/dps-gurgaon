@@ -11,7 +11,7 @@ export function PortalPage() {
   return (
     <>
       <Nav />
-      <main className="grid min-h-[100svh] place-items-center bg-navy-900 px-6 py-32 text-paper">
+      <main className="grid min-h-[100svh] place-items-center bg-forest-900 px-6 py-32 text-paper">
         <m.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -37,13 +37,13 @@ export function PortalPage() {
                 type="email"
                 disabled
                 placeholder="parent@example.com"
-                className="mt-2 w-full border border-paper/20 bg-transparent px-4 py-3 font-sans text-paper/60 placeholder:text-paper/30 focus:border-gold focus:outline-none disabled:cursor-not-allowed"
+                className="mt-2 w-full border border-paper/20 bg-transparent px-4 py-3 font-sans text-paper/60 placeholder:text-paper/30 focus:border-ochre focus:outline-none disabled:cursor-not-allowed"
               />
             </label>
             <button
               type="submit"
               disabled
-              className="w-full bg-gold/30 px-4 py-3 font-mono text-[0.72rem] uppercase tracking-label text-paper/60"
+              className="w-full bg-ochre/30 px-4 py-3 font-mono text-[0.72rem] uppercase tracking-label text-paper/60"
             >
               Sign in
             </button>
@@ -51,9 +51,9 @@ export function PortalPage() {
 
           <p
             id="portal-soon"
-            className="mt-6 flex items-center gap-3 font-mono text-[0.66rem] uppercase tracking-label text-gold-light"
+            className="mt-6 flex items-center gap-3 font-mono text-[0.66rem] uppercase tracking-label text-ochre-light"
           >
-            <span className="h-1.5 w-1.5 bg-gold" aria-hidden />
+            <span className="h-1.5 w-1.5 bg-ochre" aria-hidden />
             {t("portal.soon")}
           </p>
 

@@ -29,7 +29,7 @@ export function Figure({
   label = "Campus Photography · Coming Soon",
 }: FigureProps) {
   return (
-    <div className={cn("relative overflow-hidden bg-navy-800", className)}>
+    <div className={cn("relative overflow-hidden bg-forest-800", className)}>
       {src ? (
         <img
           src={src}
@@ -63,21 +63,21 @@ function Placeholder({
     <div
       className="absolute inset-0"
       style={{
-        backgroundImage: `radial-gradient(120% 120% at ${gx}% ${gy}%, rgba(196,149,43,0.22), transparent 52%), linear-gradient(${angle}deg, #0B1226, #1B2B5E)`,
+        backgroundImage: `radial-gradient(120% 120% at ${gx}% ${gy}%, rgba(193,154,75,0.22), transparent 52%), linear-gradient(${angle}deg, #07200F, #155b2e)`,
       }}
       aria-hidden="true"
     >
       <div className="grain absolute inset-0 opacity-50" />
       <div className="absolute inset-0 ring-1 ring-inset ring-white/[0.06]" />
       {/* hairline frame */}
-      <div className="absolute inset-3 border border-gold/20" />
+      <div className="absolute inset-3 border border-ochre/20" />
       <div className="absolute inset-0 grid place-items-center">
-        <Icon name={icon} size={42} className="text-gold/55" />
+        <Icon name={icon} size={42} className="text-ochre/55" />
       </div>
       <span className="absolute inset-x-0 bottom-4 text-center font-mono text-[0.58rem] uppercase tracking-[0.28em] text-paper/45">
         {label}
       </span>
-      <span className="absolute right-3 top-3 font-mono text-[0.56rem] tracking-widest text-gold/45">
+      <span className="absolute right-3 top-3 font-mono text-[0.56rem] tracking-widest text-ochre/45">
         DPS·{String(seed).padStart(2, "0")}
       </span>
     </div>

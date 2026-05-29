@@ -3,30 +3,29 @@
 @tailwind utilities;
 
 :root {
-  /* Font families — backed by @fontsource imports in main.tsx */
   --font-display: "Newsreader", Georgia, serif;
   --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
   --font-deva: "Tiro Devanagari Hindi", sans-serif;
 
-  /* Light theme — white / off-white + navy ink + gold accent */
+  /* Light — pure white + forest ink + multi-accent */
   --bg: 255 255 255;
-  --surface: 248 247 244;
-  --surface-2: 241 243 248;
+  --surface: 244 241 234; /* cream */
+  --surface-2: 235 240 234;
   --content: 26 26 26;
   --muted: 107 114 128;
-  --line: 27 43 94;
-  --accent: 196 149 43;
+  --line: 21 91 46; /* forest, used at low alpha */
+  --accent: 21 91 46; /* forest */
 }
 
 .dark {
-  --bg: 11 18 38;
-  --surface: 16 26 56;
-  --surface-2: 21 36 75;
-  --content: 244 246 251;
-  --muted: 158 170 196;
-  --line: 168 182 212;
-  --accent: 216 178 90;
+  --bg: 7 32 15; /* forest-900 */
+  --surface: 11 51 27; /* forest-800 */
+  --surface-2: 17 72 38; /* forest-700 */
+  --content: 244 247 240;
+  --muted: 166 205 180;
+  --line: 166 205 180;
+  --accent: 193 154 75; /* ochre on dark */
 }
 
 @layer base {
@@ -36,9 +35,7 @@
     scroll-behavior: smooth;
   }
   @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
+    html { scroll-behavior: auto; }
   }
   body {
     background-color: rgb(var(--bg));
@@ -50,7 +47,7 @@
   }
   ::selection {
     background: rgb(var(--accent) / 0.9);
-    color: #0b1226;
+    color: #fff;
   }
   :focus-visible {
     outline: 2px solid rgb(var(--accent));
@@ -76,12 +73,8 @@
 }
 
 @layer utilities {
-  .edge {
-    border-color: color-mix(in srgb, currentColor 16%, transparent);
-  }
-  .edge-mid {
-    border-color: color-mix(in srgb, currentColor 28%, transparent);
-  }
+  .edge { border-color: color-mix(in srgb, currentColor 16%, transparent); }
+  .edge-mid { border-color: color-mix(in srgb, currentColor 28%, transparent); }
   .edge-hover {
     transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
       color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -89,31 +82,13 @@
   .edge-hover:hover {
     border-color: color-mix(in srgb, currentColor 50%, transparent);
   }
-  .ink-70 {
-    color: color-mix(in srgb, currentColor 72%, transparent);
-  }
-  .text-balance {
-    text-wrap: balance;
-  }
-  .text-pretty {
-    text-wrap: pretty;
-  }
-  .fluid-hero {
-    font-size: clamp(2.75rem, 8.5vw, 7.5rem);
-    line-height: 0.95;
-  }
-  .fluid-h2 {
-    font-size: clamp(2rem, 5vw, 4rem);
-    line-height: 1;
-  }
-  .fluid-stat {
-    font-size: clamp(3rem, 7vw, 6rem);
-    line-height: 1;
-  }
-  .gpu {
-    will-change: transform;
-    transform: translateZ(0);
-  }
+  .ink-70 { color: color-mix(in srgb, currentColor 72%, transparent); }
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+  .fluid-hero { font-size: clamp(2.5rem, 7vw, 6rem); line-height: 0.96; }
+  .fluid-h2 { font-size: clamp(2rem, 5vw, 4rem); line-height: 1; }
+  .fluid-stat { font-size: clamp(2.75rem, 5.5vw, 4.5rem); line-height: 1; }
+  .gpu { will-change: transform; transform: translateZ(0); }
   .grain {
     background-image: radial-gradient(rgb(255 255 255 / 0.03) 1px, transparent 1px);
     background-size: 3px 3px;

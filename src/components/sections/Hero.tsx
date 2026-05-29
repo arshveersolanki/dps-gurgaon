@@ -1,90 +1,153 @@
-import { useRef } from "react";
-import { motion as m, useScroll, useTransform, useReducedMotion } from "framer-motion";
-import { Figure } from "@/components/ui/Figure";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion as m, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { useT } from "@/lib/i18n/useT";
+import { useLocaleStore } from "@/lib/store/locale";
+import { EASE_BOUTIQUE } from "@/lib/motion";
+import { cn } from "@/lib/cn";
 
-// The hero text is above-the-fold; entrance animations there have been
-// brittle on cold load with this Vite + framer-motion combination, and
-// the section is the first thing a visitor sees — instantaneous is fine.
-// Scroll-driven fade + bg parallax stay (they're motion-value based and work).
+interface Slide {
+  src: string;
+  tagline: { en: string; hi: string };
+}
+
+const SLIDES: Slide[] = [
+  { src: "/img/slider/01.jpg", tagline: { en: "Striving towards meaningful impact", hi: "सार्थक प्रभाव की ओर" } },
+  { src: "/img/slider/02.jpg", tagline: { en: "Ready to surge ahead", hi: "आगे बढ़ने को तत्पर" } },
+  { src: "/img/slider/03.jpg", tagline: { en: "Service Before Self", hi: "स्वयं से पहले सेवा" } },
+  { src: "/img/slider/04.jpg", tagline: { en: "Twenty-five years, one promise", hi: "पच्चीस वर्ष, एक वचन" } },
+  { src: "/img/slider/05.jpg", tagline: { en: "Rooted in service, reaching the world", hi: "सेवा में निहित, विश्व तक" } },
+  { src: "/img/slider/06.jpg", tagline: { en: "Where curiosity has room to run", hi: "जहाँ जिज्ञासा को मिले विस्तार" } },
+];
+
+const SLIDE_MS = 6000;
+const total = SLIDES.length;
+
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
   const { t } = useT();
+  const locale = useLocaleStore((s) => s.locale);
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", reduced ? "0%" : "18%"]);
-  const fade = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
+  useEffect(() => {
+    if (paused || reduced) return;
+    const id = setInterval(() => setIndex((i) => (i + 1) % total), SLIDE_MS);
+    return () => clearInterval(id);
+  }, [paused, reduced]);
+
+  const current = SLIDES[index];
 
   return (
     <section
       id="hero"
       ref={ref}
-      className="relative flex h-[100svh] min-h-[620px] w-full items-center justify-center overflow-hidden bg-navy-900"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      className="relative h-[100svh] min-h-[640px] w-full overflow-hidden bg-forest-900"
     >
-      <m.div style={{ y: bgY }} className="gpu absolute inset-0 scale-110">
-        <Figure
-          alt="Delhi Public School Gurgaon campus"
-          seed={2}
-          priority
-          sizes="100vw"
-          icon="landmark"
-          label="Campus Photography · Coming Soon"
-          className="h-full w-full"
-        />
-      </m.div>
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-900/80 via-navy-900/55 to-navy-900/90" />
+      <AnimatePresence mode="sync">
+        <m.div
+          key={current.src}
+          initial={{ opacity: 0, scale: 1.06 }}
+          animate={{ opacity: 1, scale: 1.02 }}
+          exit={{ opacity: 0, scale: 1 }}
+          transition={{ duration: 1.4, ease: EASE_BOUTIQUE }}
+          className="absolute inset-0"
+        >
+          <img
+            src={current.src}
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover"
+            loading={index === 0 ? "eager" : "lazy"}
+            decoding="async"
+          />
+        </m.div>
+      </AnimatePresence>
 
-      <m.div
-        style={{ opacity: fade }}
-        className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-6 text-center"
-      >
-        <p className="mb-7 flex items-center gap-3 font-mono text-[0.72rem] uppercase tracking-label text-gold-light">
-          <span className="h-px w-8 bg-gold" />
+      <div className="absolute inset-0 bg-gradient-to-r from-forest-900/75 via-forest-900/10 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-forest-900/85 via-forest-900/30 to-transparent" />
+
+      {/* Top-left jubilee callout */}
+      <div className="absolute left-6 top-[92px] z-10 hidden items-center gap-3 md:flex">
+        <span className="h-px w-8 bg-ochre" />
+        <span className="font-mono text-[0.66rem] uppercase tracking-[0.32em] text-paper">
           {t("hero.jubilee")}
-          <span className="h-px w-8 bg-gold" />
-        </p>
-
-        <h1 className="fluid-hero font-display font-light tracking-mega text-paper text-balance">
-          {t("hero.name")}
-        </h1>
-
-        <p className="mt-6 max-w-xl font-display text-xl italic text-paper/80 md:text-2xl">
-          {t("hero.tagline")}
-        </p>
-
-        <p className="mt-4 font-mono text-[0.66rem] uppercase tracking-[0.3em] text-paper/55">
-          Service Before Self
-        </p>
-
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-          <Button href="#admissions" variant="gold">
-            {t("hero.cta.admissions")}
-          </Button>
-          <Button href="#principal" variant="ghost" className="text-paper">
-            {t("hero.cta.explore")}
-          </Button>
-        </div>
-      </m.div>
-
-      <m.div
-        style={{ opacity: fade }}
-        className="absolute bottom-7 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 md:flex"
-      >
-        <span className="font-mono text-[0.6rem] uppercase tracking-label text-paper/55">
-          {t("hero.scroll")}
         </span>
-        <m.span
-          className="block h-10 w-px bg-paper/40"
-          animate={reduced ? undefined : { scaleY: [0.3, 1, 0.3] }}
-          style={{ transformOrigin: "top" }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        />
-      </m.div>
+      </div>
+
+      {/* Vertical brand strip */}
+      <div
+        className="pointer-events-none absolute bottom-7 left-6 z-10 hidden md:block"
+        style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
+      >
+        <span className="font-mono text-[0.6rem] uppercase tracking-[0.5em] text-paper/55">
+          DPS · Sector 45 · Est. 2001 · Gurugram
+        </span>
+      </div>
+
+      {/* Content — asymmetric bottom-left */}
+      <div className="absolute inset-0 z-10 flex flex-col justify-end pb-16 md:pb-24">
+        <div className="shell">
+          <div className="max-w-3xl pl-0 md:pl-14">
+            <h1 className="fluid-hero font-display font-light tracking-mega text-paper text-balance">
+              {t("hero.name")}
+            </h1>
+
+            <div className="mt-7 h-[3.2em] overflow-hidden">
+              <AnimatePresence mode="wait">
+                <m.p
+                  key={current.src}
+                  initial={{ y: "100%", opacity: 0 }}
+                  animate={{ y: "0%", opacity: 1 }}
+                  exit={{ y: "-100%", opacity: 0 }}
+                  transition={{ duration: 0.7, ease: EASE_BOUTIQUE }}
+                  className="font-display text-2xl italic leading-[1.3] text-paper/90 md:text-[1.7rem]"
+                >
+                  {current.tagline[locale]}
+                </m.p>
+              </AnimatePresence>
+            </div>
+
+            <div className="mt-10 flex flex-wrap items-center gap-4">
+              <Button href="#admissions" variant="ochre">
+                {t("hero.cta.admissions")}
+              </Button>
+              <Button href="#principal" variant="ghost" className="text-paper">
+                {t("hero.cta.explore")}
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Slide indicator + counter */}
+      <div className="absolute bottom-8 right-8 z-10 hidden items-center gap-6 md:flex">
+        <span className="font-mono text-[0.66rem] uppercase tracking-[0.28em] text-paper/65">
+          <span className="text-ochre">{String(index + 1).padStart(2, "0")}</span>
+          {" / "}
+          {String(total).padStart(2, "0")}
+        </span>
+        <div className="flex items-center gap-2">
+          {SLIDES.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => setIndex(i)}
+              aria-label={`Slide ${i + 1}`}
+              className={cn(
+                "h-px transition-all duration-500 ease-boutique",
+                i === index ? "w-10 bg-ochre" : "w-5 bg-paper/35 hover:bg-paper/65",
+              )}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Corner accents */}
+      <span className="pointer-events-none absolute left-0 top-[74px] h-12 w-px bg-ochre/70" />
+      <span className="pointer-events-none absolute right-0 top-[74px] h-12 w-px bg-ochre/70" />
     </section>
   );
 }

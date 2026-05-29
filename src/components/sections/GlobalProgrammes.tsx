@@ -66,7 +66,7 @@ export function GlobalProgrammes() {
                   key={`arc-${p.id}`}
                   d={arcPath(p)}
                   fill="none"
-                  stroke={active === p.id ? "#C4952B" : "#3D5396"}
+                  stroke={active === p.id ? "#C19A4B" : "#2F8B5A"}
                   strokeWidth={active === p.id ? 0.4 : 0.18}
                   strokeOpacity={active === p.id ? 1 : 0.55}
                   initial={{ pathLength: 0 }}
@@ -97,16 +97,16 @@ export function GlobalProgrammes() {
                   className={cn(
                     "block rounded-full transition-all duration-300",
                     active === p.id
-                      ? "h-3 w-3 bg-gold ring-4 ring-gold/25"
-                      : "h-2 w-2 bg-navy-400",
+                      ? "h-3 w-3 bg-ochre ring-4 ring-ochre/25"
+                      : "h-2 w-2 bg-forest-400",
                   )}
                 />
                 {active === p.id && (
-                  <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap border border-gold/40 bg-navy-900 px-2.5 py-1.5 text-center">
+                  <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap border border-ochre/40 bg-forest-900 px-2.5 py-1.5 text-center">
                     <span className="block font-sans text-[0.7rem] font-medium text-paper">
                       {pick(p.country, locale)}
                     </span>
-                    <span className="block font-mono text-[0.54rem] uppercase tracking-label text-gold-light">
+                    <span className="block font-mono text-[0.54rem] uppercase tracking-label text-ochre-light">
                       {pick(p.focus, locale)}
                     </span>
                   </span>
@@ -129,7 +129,7 @@ export function GlobalProgrammes() {
               className={cn(
                 "border px-3 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.14em] transition-colors",
                 active === p.id
-                  ? "border-gold bg-gold/10 text-content"
+                  ? "border-ochre bg-ochre/10 text-content"
                   : "border-line/20 text-muted hover:text-content",
               )}
             >
@@ -163,7 +163,7 @@ function Pin({
       style={{ left: `${x}%`, top: `${y}%` }}
     >
       <span className="relative block">
-        <span className="block h-3 w-3 rounded-full bg-gold ring-4 ring-gold/30" />
+        <span className="block h-3 w-3 rounded-full bg-ochre ring-4 ring-ochre/30" />
         {origin && (
           <span className="absolute left-1/2 top-full mt-1.5 -translate-x-1/2 whitespace-nowrap font-mono text-[0.56rem] uppercase tracking-label text-content">
             {label}

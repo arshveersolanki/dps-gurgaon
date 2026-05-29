@@ -21,7 +21,7 @@ export function LangToggle() {
         className={cn(
           "px-2.5 py-1.5 transition-colors",
           locale === "en"
-            ? "bg-navy-600 text-paper"
+            ? "bg-forest-600 text-paper"
             : "ink-70 hover:text-current",
         )}
       >
@@ -34,7 +34,7 @@ export function LangToggle() {
         className={cn(
           "px-2.5 py-1.5 font-deva transition-colors",
           locale === "hi"
-            ? "bg-navy-600 text-paper"
+            ? "bg-forest-600 text-paper"
             : "ink-70 hover:text-current",
         )}
       >

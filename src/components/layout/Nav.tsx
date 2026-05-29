@@ -57,7 +57,7 @@ export function Nav() {
                     )}
                     <span
                       className={cn(
-                        "absolute inset-x-3 bottom-1 h-px origin-left bg-gold transition-transform duration-500 ease-boutique",
+                        "absolute inset-x-3 bottom-1 h-px origin-left bg-ochre transition-transform duration-500 ease-boutique",
                         isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100",
                       )}
                     />
@@ -87,9 +87,9 @@ export function Nav() {
           <div className="flex items-center gap-2.5">
             <Link
               to="/portal"
-              className="hidden items-center gap-2 border edge-mid px-4 py-2 font-mono text-[0.68rem] uppercase tracking-[0.16em] transition-colors hover:border-gold hover:text-gold md:inline-flex"
+              className="hidden items-center gap-2 border edge-mid px-4 py-2 font-mono text-[0.68rem] uppercase tracking-[0.16em] transition-colors hover:border-ochre hover:text-ochre md:inline-flex"
             >
-              <span className="h-1.5 w-1.5 bg-gold" aria-hidden />
+              <span className="h-1.5 w-1.5 bg-ochre" aria-hidden />
               {t("nav.portal")}
             </Link>
             <div className="hidden sm:block">
@@ -110,7 +110,7 @@ export function Nav() {
         </div>
 
         <m.div
-          className="absolute inset-x-0 bottom-0 h-px origin-left bg-gold"
+          className="absolute inset-x-0 bottom-0 h-px origin-left bg-ochre"
           style={{ scaleX: scrollProgress }}
           aria-hidden
         />

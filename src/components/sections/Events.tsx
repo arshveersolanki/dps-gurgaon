@@ -57,7 +57,7 @@ export function Events() {
                   <p className="mt-1 font-sans text-sm text-muted">{pick(e.detail, locale)}</p>
                 </div>
                 <div className="md:col-span-2 md:text-right">
-                  <span className="inline-block border border-line/25 px-3 py-1.5 font-mono text-[0.6rem] uppercase tracking-label text-muted transition-colors group-hover:border-gold group-hover:text-content">
+                  <span className="inline-block border border-line/25 px-3 py-1.5 font-mono text-[0.6rem] uppercase tracking-label text-muted transition-colors group-hover:border-ochre group-hover:text-content">
                     {pick(e.tag, locale)}
                   </span>
                 </div>

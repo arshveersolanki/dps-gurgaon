@@ -55,7 +55,7 @@ export function Academics() {
               <div className="space-y-7">
                 {futureSubjects.map((f, i) => (
                   <div key={i} className="flex gap-5">
-                    <span className="mt-1 grid h-11 w-11 shrink-0 place-items-center border border-gold/40 text-gold">
+                    <span className="mt-1 grid h-11 w-11 shrink-0 place-items-center border border-ochre/40 text-ochre">
                       <Icon name={i === 0 ? "cpu" : "calculator"} size={22} />
                     </span>
                     <div>
@@ -74,8 +74,8 @@ export function Academics() {
 
           {/* Foreign languages */}
           <Reveal delay={0.08}>
-            <div className="flex h-full flex-col border border-line/15 bg-navy-900 p-8 text-paper">
-              <h3 className="mb-7 font-mono text-[0.72rem] uppercase tracking-label text-gold-light">
+            <div className="flex h-full flex-col border border-line/15 bg-forest-900 p-8 text-paper">
+              <h3 className="mb-7 font-mono text-[0.72rem] uppercase tracking-label text-ochre-light">
                 {t("academics.languages")}
               </h3>
               <div className="grid flex-1 grid-cols-1 gap-px sm:grid-cols-3">

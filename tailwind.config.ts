@@ -17,27 +17,29 @@ const config: Config = {
     },
     extend: {
       colors: {
-        // Brand — DPS Society navy
-        navy: {
-          50: "#EFF2F8",
-          100: "#D7DEEC",
-          200: "#A8B6D4",
-          300: "#6E83B5",
-          400: "#3D5396",
-          500: "#26397A",
-          600: "#1B2B5E",
-          700: "#15244B",
-          800: "#101A38",
-          900: "#0B1226",
-          DEFAULT: "#1B2B5E",
+        // Brand — DPS Gurgaon forest green (derived from real-site #155b2e).
+        forest: {
+          50: "#ECF6EF",
+          100: "#D0E8D8",
+          200: "#A6CDB4",
+          300: "#6FB089",
+          400: "#2F8B5A",
+          500: "#1B7340",
+          600: "#155b2e",
+          700: "#114826",
+          800: "#0B331B",
+          900: "#07200F",
+          DEFAULT: "#155b2e",
         },
-        gold: {
-          light: "#D8B25A",
-          DEFAULT: "#C4952B",
-          dark: "#A67C22",
-        },
+        // Multi-accent system used for the "In Numbers" ring counters and
+        // editorial accents. Hues borrowed from the real DPS site's palette.
+        teal: { light: "#3FC093", DEFAULT: "#15a876", dark: "#0F7B57" },
+        rust: { light: "#D75A33", DEFAULT: "#a8340d", dark: "#7F2008" },
+        ochre: { light: "#D8B25A", DEFAULT: "#C19A4B", dark: "#8E6D2A" },
+        slate: { light: "#5C7387", DEFAULT: "#2c4a5e", dark: "#1B2F3D" },
         ink: "#1A1A1A",
-        paper: "#F8F7F4",
+        paper: "#FFFFFF",
+        cream: "#F4F1EA",
         mist: "#6B7280",
         // Semantic tokens (theme-aware via CSS vars; channels for /alpha)
         bg: "rgb(var(--bg) / <alpha-value>)",
@@ -71,9 +73,14 @@ const config: Config = {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-50%)" },
         },
+        tickerScroll: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
       },
       animation: {
         marquee: "marquee 36s linear infinite",
+        ticker: "tickerScroll 48s linear infinite",
       },
     },
   },

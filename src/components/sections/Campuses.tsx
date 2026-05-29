@@ -45,7 +45,7 @@ export function Campuses() {
                   label="Campus Photography · Coming Soon"
                   className="absolute inset-0 transition-transform duration-700 ease-boutique group-hover:scale-[1.04]"
                 />
-                <span className="absolute left-4 top-4 bg-navy-900/85 px-3 py-1.5 font-mono text-[0.6rem] uppercase tracking-label text-gold-light backdrop-blur-sm">
+                <span className="absolute left-4 top-4 bg-forest-900/85 px-3 py-1.5 font-mono text-[0.6rem] uppercase tracking-label text-ochre-light backdrop-blur-sm">
                   {c.sector}
                 </span>
               </div>

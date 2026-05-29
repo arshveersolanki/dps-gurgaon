@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
-type Variant = "solid" | "gold" | "outline" | "ghost";
+type Variant = "solid" | "ochre" | "outline" | "ghost";
 
 interface BaseProps {
   children: ReactNode;
@@ -14,11 +14,11 @@ const base =
   "group relative inline-flex items-center gap-3 px-7 py-3.5 font-mono text-[0.72rem] font-medium uppercase tracking-label transition-colors duration-500 ease-boutique focus-visible:outline-offset-4";
 
 const variants: Record<Variant, string> = {
-  solid: "bg-navy-600 text-paper hover:bg-navy-700",
-  gold: "bg-gold text-navy-900 hover:bg-gold-light",
+  solid: "bg-forest-600 text-paper hover:bg-forest-700",
+  ochre: "bg-ochre text-paper hover:bg-ochre-dark",
   outline:
     "border border-content/25 text-content hover:border-content/60 dark:border-paper/25 dark:text-paper",
-  ghost: "text-content hover:text-navy-500 dark:text-paper",
+  ghost: "text-content hover:text-forest-500 dark:text-paper",
 };
 
 function Arrow() {

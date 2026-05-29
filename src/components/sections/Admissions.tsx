@@ -58,7 +58,7 @@ export function Admissions() {
                   variants={fadeUp}
                   className="group bg-surface p-7 transition-colors hover:bg-surface-2"
                 >
-                  <span className="font-display text-5xl font-light text-line/25 transition-colors group-hover:text-gold">
+                  <span className="font-display text-5xl font-light text-line/25 transition-colors group-hover:text-ochre">
                     {s.n}
                   </span>
                   <h4 className="mt-3 font-display text-xl tracking-tight2">
@@ -105,7 +105,7 @@ export function Admissions() {
 
       {/* CTA band */}
       <Reveal className="mt-20">
-        <div className="bg-navy-900 text-paper">
+        <div className="bg-forest-900 text-paper">
           <div className="shell flex flex-col items-center gap-8 py-16 text-center md:flex-row md:justify-between md:text-left">
             <div>
               <p className="font-display text-3xl font-light tracking-tight2 md:text-4xl">
@@ -113,13 +113,13 @@ export function Admissions() {
               </p>
               <a
                 href={`mailto:${contact.email}`}
-                className="mt-2 inline-block font-mono text-[0.66rem] uppercase tracking-label text-gold-light hover:text-gold"
+                className="mt-2 inline-block font-mono text-[0.66rem] uppercase tracking-label text-ochre-light hover:text-ochre"
               >
                 {contact.email}
               </a>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-4">
-              <Button href={`mailto:${contact.email}`} variant="gold">
+              <Button href={`mailto:${contact.email}`} variant="ochre">
                 {t("adm.cta")}
               </Button>
               <Button href="#footer" variant="ghost" className="text-paper">
