@@ -1,6 +1,3 @@
-
-import { motion as m } from "framer-motion";
-import { fadeUp, lineReveal, stagger, VIEWPORT } from "@/lib/motion";
 import { cn } from "@/lib/cn";
 
 interface SectionHeadingProps {
@@ -12,6 +9,7 @@ interface SectionHeadingProps {
   className?: string;
 }
 
+/** Static section heading — no entrance theatre. */
 export function SectionHeading({
   eyebrow,
   title,
@@ -21,11 +19,7 @@ export function SectionHeading({
   className,
 }: SectionHeadingProps) {
   return (
-    <m.header
-      variants={stagger(0, 0.1)}
-      initial="hidden"
-      whileInView="show"
-      viewport={VIEWPORT}
+    <header
       className={cn(
         "max-w-3xl",
         align === "center" && "mx-auto text-center",
@@ -33,12 +27,9 @@ export function SectionHeading({
       )}
     >
       {eyebrow && (
-        <m.p
-          variants={fadeUp}
-          className={cn("eyebrow mb-5", tone === "invert" && "text-ochre-light")}
-        >
+        <p className={cn("eyebrow mb-5", tone === "invert" && "text-ochre-light")}>
           {eyebrow}
-        </m.p>
+        </p>
       )}
       <h2
         className={cn(
@@ -46,15 +37,10 @@ export function SectionHeading({
           tone === "invert" ? "text-paper" : "text-content",
         )}
       >
-        <span className="block overflow-hidden pb-[0.12em]">
-          <m.span variants={lineReveal} className="block">
-            {title}
-          </m.span>
-        </span>
+        {title}
       </h2>
       {intro && (
-        <m.p
-          variants={fadeUp}
+        <p
           className={cn(
             "mt-6 max-w-editorial font-sans text-lg leading-relaxed text-pretty",
             align === "center" && "mx-auto",
@@ -62,8 +48,8 @@ export function SectionHeading({
           )}
         >
           {intro}
-        </m.p>
+        </p>
       )}
-    </m.header>
+    </header>
   );
 }

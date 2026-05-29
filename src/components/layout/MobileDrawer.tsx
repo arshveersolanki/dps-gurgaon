@@ -73,9 +73,7 @@ export function MobileDrawer() {
               to="/portal"
               onClick={() => setOpen(false)}
               className="inline-flex items-center gap-2 border border-paper/30 px-5 py-3 font-mono text-[0.7rem] uppercase tracking-label hover:border-ochre hover:text-ochre"
-            >
-              <span className="h-1.5 w-1.5 bg-ochre" aria-hidden />
-              {t("nav.portal")}
+            >              {t("nav.portal")}
             </Link>
             <LangToggle />
           </div>

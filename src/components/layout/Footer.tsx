@@ -137,9 +137,7 @@ export function Footer() {
           <Link
             to="/portal"
             className="mt-7 inline-flex items-center gap-2 border border-ochre/50 px-5 py-3 font-mono text-[0.68rem] uppercase tracking-label text-ochre transition-colors hover:bg-ochre hover:text-forest-900"
-          >
-            <span className="h-1.5 w-1.5 bg-ochre" aria-hidden />
-            {t("nav.portal")}
+          >            {t("nav.portal")}
           </Link>
         </div>
       </div>

@@ -101,9 +101,7 @@ export function Nav() {
             <Link
               to="/portal"
               className="hidden items-center gap-2 whitespace-nowrap border edge-mid px-3 py-1.5 font-mono text-[0.6rem] uppercase tracking-[0.16em] transition-colors hover:border-ochre hover:text-ochre md:inline-flex"
-            >
-              <span className="h-1.5 w-1.5 bg-ochre" aria-hidden />
-              {t("nav.portal")}
+            >              {t("nav.portal")}
             </Link>
             <div className="hidden sm:block">
               <LangToggle />
