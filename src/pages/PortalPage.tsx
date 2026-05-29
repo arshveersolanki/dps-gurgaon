@@ -1,7 +1,5 @@
 import { motion as m } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Nav } from "@/components/layout/Nav";
-import { Footer } from "@/components/layout/Footer";
 import { useT } from "@/lib/i18n/useT";
 import { EASE_BOUTIQUE } from "@/lib/motion";
 
@@ -9,9 +7,7 @@ export function PortalPage() {
   const { t } = useT();
 
   return (
-    <>
-      <Nav />
-      <main className="grid min-h-[100svh] place-items-center bg-forest-900 px-6 py-32 text-paper">
+    <section className="grid min-h-[100svh] place-items-center bg-forest-900 px-6 py-32 text-paper">
         <m.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -63,9 +59,7 @@ export function PortalPage() {
           >
             ← {t("common.back")}
           </Link>
-        </m.div>
-      </main>
-      <Footer />
-    </>
+      </m.div>
+    </section>
   );
 }

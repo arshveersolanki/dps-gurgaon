@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { motion as m } from "framer-motion";
 import { Logo } from "@/components/layout/Logo";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
@@ -10,12 +10,23 @@ import { useUI } from "@/lib/store/ui";
 import { useT } from "@/lib/i18n/useT";
 import { cn } from "@/lib/cn";
 
+/** Returns true if the current route matches a nav target (ignoring hashes). */
+function routeMatches(currentPath: string, to: string): boolean {
+  const path = to.split("#")[0] || "/";
+  if (path === "/") return currentPath === "/";
+  return currentPath === path || currentPath.startsWith(path + "/");
+}
+
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
-  const active = useUI((s) => s.activeSection);
   const scrollProgress = useUI((s) => s.scrollProgress);
   const setMobileOpen = useUI((s) => s.setMobileOpen);
   const { t } = useT();
+  const { pathname } = useLocation();
+
+  // Home hero is the only place that wants the over-photo paper text colour;
+  // every other route gets a solid (light or themed) bar with content-coloured text.
+  const onHome = pathname === "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -24,12 +35,14 @@ export function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const solid = scrolled || !onHome;
+
   return (
     <>
       <header
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-colors duration-500 ease-boutique",
-          scrolled
+          solid
             ? "border-b border-line/15 bg-bg/85 text-content backdrop-blur-md supports-[backdrop-filter]:bg-bg/70"
             : "border-b border-transparent text-paper",
         )}
@@ -39,11 +52,11 @@ export function Nav() {
 
           <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
             {NAV.map((item) => {
-              const isActive = item.href === `#${active}`;
+              const isActive = routeMatches(pathname, item.to);
               return (
                 <div key={item.key} className="group relative">
-                  <a
-                    href={item.href}
+                  <Link
+                    to={item.to}
                     className={cn(
                       "relative flex items-center gap-1.5 whitespace-nowrap px-2.5 py-2 font-mono text-[0.62rem] uppercase tracking-[0.14em] transition-colors",
                       isActive ? "text-current" : "ink-70 hover:text-current",
@@ -61,7 +74,7 @@ export function Nav() {
                         isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100",
                       )}
                     />
-                  </a>
+                  </Link>
 
                   {item.children && (
                     <div className="invisible absolute left-0 top-full w-60 translate-y-1 border border-line/15 bg-surface text-content opacity-0 shadow-xl transition-all duration-300 ease-boutique group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
@@ -69,13 +82,13 @@ export function Nav() {
                         {t(item.key)}
                       </span>
                       {item.children.map((c) => (
-                        <a
+                        <Link
                           key={c.label}
-                          href={c.href}
+                          to={c.to}
                           className="block px-4 py-2.5 font-sans text-sm text-content/80 transition-colors hover:bg-surface-2 hover:text-content"
                         >
                           {c.label}
-                        </a>
+                        </Link>
                       ))}
                     </div>
                   )}

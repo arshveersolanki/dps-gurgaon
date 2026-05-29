@@ -1,11 +1,17 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { Providers } from "@/components/layout/Providers";
+import { RootLayout } from "@/components/layout/RootLayout";
 import { HomePage } from "@/pages/HomePage";
+import { AboutPage } from "@/pages/AboutPage";
+import { AcademicsPage } from "@/pages/AcademicsPage";
+import { GlobalPage } from "@/pages/GlobalPage";
+import { CampusPage } from "@/pages/CampusPage";
+import { NewsPage } from "@/pages/NewsPage";
 import { AdmissionsPage } from "@/pages/AdmissionsPage";
+import { ContactPage } from "@/pages/ContactPage";
 import { PortalPage } from "@/pages/PortalPage";
 
-/** Smooth-scroll to the section when the URL contains a hash. */
 function HashScroller() {
   const { hash, pathname } = useLocation();
   useEffect(() => {
@@ -23,10 +29,18 @@ export function App() {
     <Providers>
       <HashScroller />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/admissions" element={<AdmissionsPage />} />
-        <Route path="/portal" element={<PortalPage />} />
-        <Route path="*" element={<HomePage />} />
+        <Route element={<RootLayout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/academics" element={<AcademicsPage />} />
+          <Route path="/global" element={<GlobalPage />} />
+          <Route path="/campus" element={<CampusPage />} />
+          <Route path="/news" element={<NewsPage />} />
+          <Route path="/admissions" element={<AdmissionsPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/portal" element={<PortalPage />} />
+          <Route path="*" element={<HomePage />} />
+        </Route>
       </Routes>
     </Providers>
   );
