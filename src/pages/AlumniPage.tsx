@@ -1,4 +1,4 @@
-import { ImagePageHeader } from "@/components/ui/ImagePageHeader";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { placements, placementHighlight } from "@/lib/content/alumni";
@@ -6,15 +6,14 @@ import { placements, placementHighlight } from "@/lib/content/alumni";
 export function AlumniPage() {
   return (
     <>
-      <ImagePageHeader
-        image="/img/sections/results.jpg"
-        alt="DPS Gurgaon students celebrating board examination results"
+      <PageHeader
         eyebrow="Alumni"
         title="Where the school has gone next"
-        intro="Eleven years of tracked placement, more than a thousand four hundred offers across the Indian Institutes, the UK Russell Group, the US Ivy League and beyond."
+        intro="Eleven years of tracked placement, more than a thousand and four hundred offers across the Indian Institutes, the UK Russell Group, the US Ivy League and beyond."
       />
       <Section id="alumni" className="bg-bg">
         <div className="shell">
+          {/* Stat strip */}
           <div className="grid gap-px border border-line/15 md:grid-cols-3">
             <div className="bg-bg p-7">
               <p className="font-display text-5xl font-light text-forest-600">
@@ -40,6 +39,7 @@ export function AlumniPage() {
             </div>
           </div>
 
+          {/* Cluster list */}
           <div className="mt-16 grid gap-12 md:grid-cols-2">
             {placements.map((p) => (
               <div key={p.region}>

@@ -1,4 +1,4 @@
-import { ImagePageHeader } from "@/components/ui/ImagePageHeader";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { Section } from "@/components/ui/Section";
 import { useLocaleStore } from "@/lib/store/locale";
 import { houses } from "@/lib/content/houses";
@@ -9,9 +9,7 @@ export function HousesPage() {
 
   return (
     <>
-      <ImagePageHeader
-        image="/img/sections/house-function.jpg"
-        alt="DPS Gurgaon Jamuna and Jhelum House Function — Seeds of Tomorrow"
+      <PageHeader
         eyebrow="Houses"
         title="Four rivers, one school"
         intro="Every student belongs to one of four houses, named after the rivers that shape the subcontinent. The house culture runs through assemblies, sports, drama and a calendar of inter-house cups."
@@ -22,6 +20,7 @@ export function HousesPage() {
             {houses.map((h, i) => (
               <li key={h.id} className="relative bg-bg p-10">
                 <div className="flex items-start justify-between gap-6">
+                  {/* Open-ring house mark */}
                   <span className="relative grid h-20 w-20 shrink-0 place-items-center">
                     <svg viewBox="0 0 80 80" className="absolute inset-0">
                       <circle
