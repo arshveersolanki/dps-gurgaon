@@ -17,9 +17,9 @@ export function Logo() {
       <img
         src={src}
         alt="Delhi Public School, Sector 45, Gurgaon"
-        width={210}
-        height={44}
-        className="h-11 w-auto"
+        width={172}
+        height={36}
+        className="h-9 w-auto"
       />
     </Link>
   );

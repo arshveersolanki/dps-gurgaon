@@ -8,10 +8,10 @@
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
   --font-deva: "Tiro Devanagari Hindi", sans-serif;
 
-  /* Light — pure white + forest ink + multi-accent */
+  /* Light — pure white + faint cool forest-tinted greys (no warm cream) */
   --bg: 255 255 255;
-  --surface: 244 241 234; /* cream */
-  --surface-2: 235 240 234;
+  --surface: 247 250 248;
+  --surface-2: 236 243 238;
   --content: 26 26 26;
   --muted: 107 114 128;
   --line: 21 91 46; /* forest, used at low alpha */

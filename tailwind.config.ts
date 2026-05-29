@@ -39,7 +39,6 @@ const config: Config = {
         slate: { light: "#5C7387", DEFAULT: "#2c4a5e", dark: "#1B2F3D" },
         ink: "#1A1A1A",
         paper: "#FFFFFF",
-        cream: "#F4F1EA",
         mist: "#6B7280",
         // Semantic tokens (theme-aware via CSS vars; channels for /alpha)
         bg: "rgb(var(--bg) / <alpha-value>)",

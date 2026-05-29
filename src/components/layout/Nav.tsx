@@ -45,7 +45,7 @@ export function Nav() {
                   <a
                     href={item.href}
                     className={cn(
-                      "relative flex items-center gap-1.5 px-3 py-2 font-mono text-[0.7rem] uppercase tracking-[0.16em] transition-colors",
+                      "relative flex items-center gap-1.5 whitespace-nowrap px-2.5 py-2 font-mono text-[0.62rem] uppercase tracking-[0.14em] transition-colors",
                       isActive ? "text-current" : "ink-70 hover:text-current",
                     )}
                   >
@@ -87,7 +87,7 @@ export function Nav() {
           <div className="flex items-center gap-2.5">
             <Link
               to="/portal"
-              className="hidden items-center gap-2 border edge-mid px-4 py-2 font-mono text-[0.68rem] uppercase tracking-[0.16em] transition-colors hover:border-ochre hover:text-ochre md:inline-flex"
+              className="hidden items-center gap-2 whitespace-nowrap border edge-mid px-3 py-1.5 font-mono text-[0.6rem] uppercase tracking-[0.16em] transition-colors hover:border-ochre hover:text-ochre md:inline-flex"
             >
               <span className="h-1.5 w-1.5 bg-ochre" aria-hidden />
               {t("nav.portal")}
