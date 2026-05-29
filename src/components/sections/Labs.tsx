@@ -25,14 +25,15 @@ export function Labs() {
           {/* Featured — Atal Tinkering Lab */}
           {featured && (
             <Reveal className="lg:col-span-5">
-              <div className="relative flex h-full flex-col justify-between overflow-hidden border border-ochre/40 bg-forest-900 p-8 text-paper">
-                <div
-                  className="pointer-events-none absolute inset-0"
-                  style={{
-                    backgroundImage:
-                      "radial-gradient(90% 90% at 80% 0%, rgba(193,154,75,0.16), transparent 55%)",
-                  }}
+              <div className="relative flex h-full min-h-[420px] flex-col justify-between overflow-hidden border border-ochre/40 bg-forest-900 p-8 text-paper">
+                {/* Real ATL lab photo */}
+                <img alt="Atal Tinkering Lab interior at DPS Gurgaon"
+                  src="/img/sections/labs.jpg"
+                  className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-30"
+                  loading="lazy"
+                  decoding="async"
                 />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-forest-900/85 via-forest-900/65 to-forest-900/80" />
                 <div className="relative">
                   <span className="inline-block bg-ochre px-2.5 py-1 font-mono text-[0.58rem] uppercase tracking-label text-forest-900">
                     {t("labs.featured")}

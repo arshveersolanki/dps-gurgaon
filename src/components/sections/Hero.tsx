@@ -56,9 +56,8 @@ export function Hero() {
           transition={{ duration: 1.4, ease: EASE_BOUTIQUE }}
           className="absolute inset-0"
         >
-          <img
+          <img alt="Delhi Public School Gurgaon — scene from campus life"
             src={current.src}
-            alt=""
             className="absolute inset-0 h-full w-full object-cover"
             loading={index === 0 ? "eager" : "lazy"}
             decoding="async"
@@ -66,8 +65,10 @@ export function Hero() {
         </m.div>
       </AnimatePresence>
 
-      <div className="absolute inset-0 bg-gradient-to-r from-forest-900/75 via-forest-900/10 to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-forest-900/85 via-forest-900/30 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-forest-900/85 via-forest-900/30 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-forest-900 via-forest-900/60 to-transparent" />
+      {/* Hard left edge band — keeps the type readable on any slide */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-[42%] bg-gradient-to-r from-forest-900/55 to-transparent md:block" />
 
       {/* Top-left jubilee callout */}
       <div className="absolute left-6 top-[92px] z-10 hidden items-center gap-3 md:flex">
