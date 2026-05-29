@@ -15,14 +15,13 @@ const CAMPUS_IMAGES = [
   "/img/sections/campus-infant.jpg",
 ];
 
-export function Campuses({ hideHeading = false }: { hideHeading?: boolean } = {}) {
+export function Campuses() {
   const { t } = useT();
   const locale = useLocaleStore((s) => s.locale);
 
   return (
     <Section id="campus" className="bg-bg">
       <div className="shell">
-        {!hideHeading && (
         <m.header
           variants={stagger(0, 0.1)}
           initial="hidden"
@@ -48,7 +47,6 @@ export function Campuses({ hideHeading = false }: { hideHeading?: boolean } = {}
             </Button>
           </m.div>
         </m.header>
-        )}
 
         {/* Alternating magazine rows */}
         <div className="mt-20 space-y-24 md:mt-28 md:space-y-32">

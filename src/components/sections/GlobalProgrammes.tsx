@@ -1,10 +1,6 @@
-import { useMemo, useState } from "react";
+
+import { useState } from "react";
 import { motion as m } from "framer-motion";
-import { feature } from "topojson-client";
-import { geoEqualEarth, geoPath } from "d3-geo";
-import type { FeatureCollection, Geometry } from "geojson";
-import type { Topology, GeometryCollection } from "topojson-specification";
-import worldData from "world-atlas/countries-110m.json";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useT } from "@/lib/i18n/useT";
@@ -14,159 +10,113 @@ import { pick } from "@/lib/content/types";
 import { EASE_BOUTIQUE, VIEWPORT } from "@/lib/motion";
 import { cn } from "@/lib/cn";
 
-const VB_W = 1000;
-const VB_H = 500;
+// viewBox is 100 x 50 (equirectangular). x = lon%, y(view) = lat% * 0.5.
+const vy = (latPct: number) => latPct * 0.5;
 
-interface CountryProps { name?: string }
-const topology = worldData as unknown as Topology<{ countries: GeometryCollection<CountryProps> }>;
-const countries = feature(
-  topology,
-  topology.objects.countries,
-) as unknown as FeatureCollection<Geometry, CountryProps>;
+function arcPath(p: Partner): string {
+  const ox = origin.x;
+  const oy = vy(origin.y);
+  const px = p.x;
+  const py = vy(p.y);
+  const mx = (ox + px) / 2;
+  const dist = Math.hypot(px - ox, py - oy);
+  const my = Math.min(oy, py) - dist * 0.28 - 2;
+  return `M ${ox} ${oy} Q ${mx} ${my} ${px} ${py}`;
+}
 
-// Existing programmes data stores x/y as percentages on an equirectangular grid;
-// convert back to real lon/lat for d3-geo projection.
-const toLonLat = (xPct: number, yPct: number): [number, number] => [
-  (xPct / 100) * 360 - 180,
-  90 - (yPct / 100) * 180,
-];
-
-export function GlobalProgrammes({ hideHeading = false }: { hideHeading?: boolean } = {}) {
+export function GlobalProgrammes() {
   const { t } = useT();
   const locale = useLocaleStore((s) => s.locale);
   const [active, setActive] = useState<string | null>(null);
 
-  const { pathGen, originPx, partnerPx } = useMemo(() => {
-    const proj = geoEqualEarth().fitSize([VB_W, VB_H], countries);
-    const pg = geoPath(proj);
-    const oxy = proj(toLonLat(origin.x, origin.y)) as [number, number];
-    const pxy: Record<string, [number, number]> = {};
-    partners.forEach((p) => {
-      pxy[p.id] = proj(toLonLat(p.x, p.y)) as [number, number];
-    });
-    return { pathGen: pg, originPx: oxy, partnerPx: pxy };
-  }, []);
-
-  const arc = (p: Partner): string => {
-    const [ox, oy] = originPx;
-    const [px, py] = partnerPx[p.id];
-    const mx = (ox + px) / 2;
-    const dist = Math.hypot(px - ox, py - oy);
-    const my = Math.min(oy, py) - Math.max(40, dist * 0.32);
-    return `M ${ox} ${oy} Q ${mx} ${my} ${px} ${py}`;
-  };
-
   return (
-    <Section id="global" className="bg-bg">
+    <Section id="global" className="bg-surface">
       <div className="shell">
-        {!hideHeading && (
-          <SectionHeading
-            eyebrow={t("global.eyebrow")}
-            title={t("global.title")}
-            intro={t("global.sub")}
-            align="center"
-          />
-        )}
+        <SectionHeading
+          eyebrow={t("global.eyebrow")}
+          title={t("global.title")}
+          intro={t("global.sub")}
+          align="center"
+        />
 
         <m.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEWPORT}
           transition={{ duration: 0.9, ease: EASE_BOUTIQUE }}
-          className="relative mx-auto mt-14 max-w-6xl border border-line/15 bg-surface p-3 md:p-5"
+          className="relative mx-auto mt-14 max-w-5xl border border-line/15 bg-bg p-3 md:p-5"
         >
-          <div className="relative w-full" style={{ aspectRatio: `${VB_W} / ${VB_H}` }}>
+          <div className="relative aspect-[2/1] w-full">
             <svg
-              viewBox={`0 0 ${VB_W} ${VB_H}`}
+              viewBox="0 0 100 50"
+              preserveAspectRatio="none"
               className="absolute inset-0 h-full w-full"
-              aria-label="World map highlighting DPS Gurgaon exchange partner countries"
+              aria-hidden="true"
             >
-              <path
-                d={pathGen({ type: "Sphere" }) ?? ""}
-                fill="none"
-                stroke="rgb(var(--line) / 0.10)"
-                strokeWidth={1}
-              />
-              <g>
-                {countries.features.map((f, i) => (
-                  <path
-                    key={i}
-                    d={pathGen(f) ?? ""}
-                    fill="rgb(var(--line) / 0.05)"
-                    stroke="rgb(var(--line) / 0.30)"
-                    strokeWidth={0.4}
-                  />
+              <g className="text-line" stroke="currentColor" strokeOpacity="0.12" strokeWidth="0.08">
+                {Array.from({ length: 11 }, (_, i) => (
+                  <line key={`v${i}`} x1={i * 10} y1={0} x2={i * 10} y2={50} />
+                ))}
+                {Array.from({ length: 6 }, (_, i) => (
+                  <line key={`h${i}`} x1={0} y1={i * 10} x2={100} y2={i * 10} />
                 ))}
               </g>
-              <g>
-                {partners.map((p) => (
-                  <m.path
-                    key={`arc-${p.id}`}
-                    d={arc(p)}
-                    fill="none"
-                    stroke={active === p.id ? "#C19A4B" : "#15a876"}
-                    strokeOpacity={active === p.id ? 1 : 0.65}
-                    strokeWidth={active === p.id ? 2.2 : 1.1}
-                    strokeLinecap="round"
-                    initial={{ pathLength: 0 }}
-                    whileInView={{ pathLength: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.4, ease: EASE_BOUTIQUE }}
-                  />
-                ))}
-              </g>
-              <g>
-                <circle cx={originPx[0]} cy={originPx[1]} r={5} fill="#C19A4B" />
-                <circle cx={originPx[0]} cy={originPx[1]} r={9} fill="none" stroke="#C19A4B" strokeWidth={1} strokeOpacity={0.55} />
-                <text x={originPx[0] + 9} y={originPx[1] + 4} fontSize={11} className="fill-content font-mono">
-                  {pick(origin.label, locale)}
-                </text>
-              </g>
-              <g>
-                {partners.map((p) => {
-                  const [x, y] = partnerPx[p.id];
-                  const isActive = active === p.id;
-                  return (
-                    <g
-                      key={`pin-${p.id}`}
-                      onMouseEnter={() => setActive(p.id)}
-                      onMouseLeave={() => setActive(null)}
-                      onFocus={() => setActive(p.id)}
-                      onBlur={() => setActive(null)}
-                      style={{ cursor: "pointer" }}
-                      tabIndex={0}
-                    >
-                      <circle cx={x} cy={y} r={isActive ? 6 : 4} fill={isActive ? "#C19A4B" : "#155b2e"} />
-                      <circle cx={x} cy={y} r={isActive ? 12 : 8} fill="none" stroke={isActive ? "#C19A4B" : "#155b2e"} strokeOpacity={0.45} strokeWidth={1} />
-                    </g>
-                  );
-                })}
-              </g>
+              {partners.map((p) => (
+                <m.path
+                  key={`arc-${p.id}`}
+                  d={arcPath(p)}
+                  fill="none"
+                  stroke={active === p.id ? "#C19A4B" : "#2F8B5A"}
+                  strokeWidth={active === p.id ? 0.4 : 0.18}
+                  strokeOpacity={active === p.id ? 1 : 0.55}
+                  initial={{ pathLength: 0 }}
+                  whileInView={{ pathLength: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.4, ease: EASE_BOUTIQUE }}
+                />
+              ))}
             </svg>
 
-            {partners.map((p) => {
-              if (active !== p.id) return null;
-              const [x, y] = partnerPx[p.id];
-              const leftPct = (x / VB_W) * 100;
-              const topPct = (y / VB_H) * 100;
-              return (
-                <div
-                  key={`tt-${p.id}`}
-                  className="pointer-events-none absolute z-10 -translate-x-1/2 -translate-y-[calc(100%+18px)] whitespace-nowrap border border-ochre/50 bg-forest-900 px-3 py-2 text-center"
-                  style={{ left: `${leftPct}%`, top: `${topPct}%` }}
-                >
-                  <span className="block font-sans text-[0.78rem] font-medium text-paper">
-                    {pick(p.country, locale)} · {p.city}
+            {/* Origin pin */}
+            <Pin x={origin.x} y={origin.y} origin label={pick(origin.label, locale)} />
+
+            {/* Partner pins */}
+            {partners.map((p) => (
+              <button
+                key={p.id}
+                type="button"
+                onMouseEnter={() => setActive(p.id)}
+                onMouseLeave={() => setActive(null)}
+                onFocus={() => setActive(p.id)}
+                onBlur={() => setActive(null)}
+                className="absolute z-10 -translate-x-1/2 -translate-y-1/2"
+                style={{ left: `${p.x}%`, top: `${p.y}%` }}
+                aria-label={`${pick(p.country, locale)} — ${pick(p.focus, locale)}`}
+              >
+                <span
+                  className={cn(
+                    "block rounded-full transition-all duration-300",
+                    active === p.id
+                      ? "h-3 w-3 bg-ochre ring-4 ring-ochre/25"
+                      : "h-2 w-2 bg-forest-400",
+                  )}
+                />
+                {active === p.id && (
+                  <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap border border-ochre/40 bg-forest-900 px-2.5 py-1.5 text-center">
+                    <span className="block font-sans text-[0.7rem] font-medium text-paper">
+                      {pick(p.country, locale)}
+                    </span>
+                    <span className="block font-mono text-[0.54rem] uppercase tracking-label text-ochre-light">
+                      {pick(p.focus, locale)}
+                    </span>
                   </span>
-                  <span className="mt-0.5 block font-mono text-[0.56rem] uppercase tracking-label text-ochre-light">
-                    {pick(p.focus, locale)}
-                  </span>
-                </div>
-              );
-            })}
+                )}
+              </button>
+            ))}
           </div>
         </m.div>
 
+        {/* Country chips — accessible + touch-friendly */}
         <div className="mx-auto mt-8 flex max-w-4xl flex-wrap justify-center gap-2">
           {partners.map((p) => (
             <button
@@ -178,7 +128,9 @@ export function GlobalProgrammes({ hideHeading = false }: { hideHeading?: boolea
               onBlur={() => setActive(null)}
               className={cn(
                 "border px-3 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.14em] transition-colors",
-                active === p.id ? "border-ochre bg-ochre/10 text-content" : "border-line/20 text-muted hover:text-content",
+                active === p.id
+                  ? "border-ochre bg-ochre/10 text-content"
+                  : "border-line/20 text-muted hover:text-content",
               )}
             >
               {pick(p.country, locale)}
@@ -191,5 +143,33 @@ export function GlobalProgrammes({ hideHeading = false }: { hideHeading?: boolea
         </p>
       </div>
     </Section>
+  );
+}
+
+function Pin({
+  x,
+  y,
+  origin,
+  label,
+}: {
+  x: number;
+  y: number;
+  origin?: boolean;
+  label: string;
+}) {
+  return (
+    <span
+      className="absolute z-20 -translate-x-1/2 -translate-y-1/2"
+      style={{ left: `${x}%`, top: `${y}%` }}
+    >
+      <span className="relative block">
+        <span className="block h-3 w-3 rounded-full bg-ochre ring-4 ring-ochre/30" />
+        {origin && (
+          <span className="absolute left-1/2 top-full mt-1.5 -translate-x-1/2 whitespace-nowrap font-mono text-[0.56rem] uppercase tracking-label text-content">
+            {label}
+          </span>
+        )}
+      </span>
+    </span>
   );
 }

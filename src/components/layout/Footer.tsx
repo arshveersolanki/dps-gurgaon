@@ -77,9 +77,9 @@ export function Footer() {
           <ul className="space-y-3">
             {NAV.map((item) => (
               <li key={item.key}>
-                <Link to={item.to} className="font-sans text-sm text-paper/65 transition-colors hover:text-ochre">
+                <a href={item.href} className="font-sans text-sm text-paper/65 transition-colors hover:text-ochre">
                   {t(item.key)}
-                </Link>
+                </a>
               </li>
             ))}
           </ul>

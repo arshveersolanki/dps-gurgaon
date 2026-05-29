@@ -2,40 +2,40 @@ import type { TranslationKey } from "@/lib/i18n/dict";
 
 export interface NavLink {
   key: TranslationKey;
-  to: string;
-  /** Optional second-level routes for the desktop flyout. */
-  children?: { label: string; to: string }[];
+  href: string;
+  children?: { label: string; href: string }[];
 }
 
 export const NAV: NavLink[] = [
   {
     key: "nav.about",
-    to: "/about",
+    href: "#principal",
     children: [
-      { label: "Principal's Message", to: "/about" },
-      { label: "DPS in Numbers", to: "/#numbers" },
-      { label: "Our Campuses", to: "/campus" },
+      { label: "Principal's Message", href: "#principal" },
+      { label: "DPS in Numbers", href: "#numbers" },
+      { label: "Our Campuses", href: "#campus" },
     ],
   },
   {
     key: "nav.academics",
-    to: "/academics",
+    href: "#academics",
     children: [
-      { label: "Curriculum", to: "/academics" },
-      { label: "Labs & Innovation", to: "/academics#labs" },
-      { label: "Clubs & Societies", to: "/academics#clubs" },
+      { label: "Curriculum", href: "#academics" },
+      { label: "Labs & Innovation", href: "#labs" },
+      { label: "Clubs & Societies", href: "#clubs" },
     ],
   },
-  { key: "nav.global", to: "/global" },
+  { key: "nav.global", href: "#global" },
   {
     key: "nav.campusLife",
-    to: "/campus",
+    href: "#clubs",
     children: [
-      { label: "Our Campuses", to: "/campus" },
-      { label: "Community Outreach", to: "/campus#outreach" },
+      { label: "Clubs & Societies", href: "#clubs" },
+      { label: "Our Campuses", href: "#campus" },
+      { label: "Community Outreach", href: "#outreach" },
     ],
   },
-  { key: "nav.news", to: "/news" },
-  { key: "nav.admissions", to: "/admissions" },
-  { key: "nav.contact", to: "/contact" },
+  { key: "nav.news", href: "#news" },
+  { key: "nav.admissions", href: "#admissions" },
+  { key: "nav.contact", href: "#footer" },
 ];

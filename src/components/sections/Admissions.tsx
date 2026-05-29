@@ -10,15 +10,13 @@ import { contact } from "@/lib/content/campuses";
 import { pick } from "@/lib/content/types";
 import { fadeUp, stagger, VIEWPORT } from "@/lib/motion";
 
-export function Admissions({ hideHeading = false }: { hideHeading?: boolean } = {}) {
+export function Admissions() {
   const { t, locale } = useT();
 
   return (
     <Section id="admissions" className="bg-bg">
       <div className="shell">
-        {!hideHeading && (
-          <SectionHeading eyebrow={t("adm.eyebrow")} title={t("adm.title")} align="center" />
-        )}
+        <SectionHeading eyebrow={t("adm.eyebrow")} title={t("adm.title")} align="center" />
 
         {/* Entry points */}
         <m.div

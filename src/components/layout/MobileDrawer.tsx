@@ -56,14 +56,14 @@ export function MobileDrawer() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.12 + i * 0.05, ease: EASE_BOUTIQUE }}
               >
-                <Link
-                  to={item.to}
+                <a
+                  href={item.href}
                   onClick={() => setOpen(false)}
                   className="flex items-baseline gap-4 border-b border-paper/10 py-4 font-display text-3xl font-light tracking-tight2 transition-colors hover:text-ochre"
                 >
                   <span className="font-mono text-[0.7rem] text-ochre/70">0{i + 1}</span>
                   {t(item.key)}
-                </Link>
+                </a>
               </m.div>
             ))}
           </nav>

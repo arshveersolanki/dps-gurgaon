@@ -9,14 +9,13 @@ import { stages, futureSubjects, languages } from "@/lib/content/academics";
 import { pick } from "@/lib/content/types";
 import { fadeUp, stagger, lineReveal, VIEWPORT } from "@/lib/motion";
 
-export function Academics({ hideHeading = false }: { hideHeading?: boolean } = {}) {
+export function Academics() {
   const { t } = useT();
   const locale = useLocaleStore((s) => s.locale);
 
   return (
     <Section id="academics" className="bg-bg">
       <div className="shell">
-        {!hideHeading && (
         <m.header
           variants={stagger(0, 0.1)}
           initial="hidden"
@@ -44,7 +43,6 @@ export function Academics({ hideHeading = false }: { hideHeading?: boolean } = {
             a fourteen-year arc, one school.
           </m.p>
         </m.header>
-        )}
 
         {/* Journey rail — desktop horizontal, mobile vertical */}
         <m.div
