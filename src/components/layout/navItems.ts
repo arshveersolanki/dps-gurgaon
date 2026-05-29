@@ -13,8 +13,6 @@ export const NAV: NavLink[] = [
     to: "/about",
     children: [
       { label: "Principal's Message", to: "/about" },
-      { label: "Houses", to: "/houses" },
-      { label: "Alumni", to: "/alumni" },
       { label: "DPS in Numbers", to: "/#numbers" },
       { label: "Our Campuses", to: "/campus" },
     ],

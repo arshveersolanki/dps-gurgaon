@@ -11,8 +11,6 @@ import { NewsPage } from "@/pages/NewsPage";
 import { AdmissionsPage } from "@/pages/AdmissionsPage";
 import { ContactPage } from "@/pages/ContactPage";
 import { PortalPage } from "@/pages/PortalPage";
-import { HousesPage } from "@/pages/HousesPage";
-import { AlumniPage } from "@/pages/AlumniPage";
 
 function HashScroller() {
   const { hash, pathname } = useLocation();
@@ -40,8 +38,6 @@ export function App() {
           <Route path="/news" element={<NewsPage />} />
           <Route path="/admissions" element={<AdmissionsPage />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="/houses" element={<HousesPage />} />
-          <Route path="/alumni" element={<AlumniPage />} />
           <Route path="/portal" element={<PortalPage />} />
           <Route path="*" element={<HomePage />} />
         </Route>
